@@ -1,0 +1,9 @@
+﻿KeyIndicator;Product_PubproductID;Product_Name;Date_ID;Datetype;D2;ValueChain_Name;KeyIndicatorType_Name
+33.63;ID_1;Total, Konsumeier;20230101;Year;1;Konsum;Menge
+45.93;ID_2;Total, CH;20230101;Year;1;Konsum;Menge
+13.17;ID_3;Boden, Schaleneier, CH;20230101;Year;1;Konsum;Menge
+19.87;ID_4;Total, CH + Import;20230101;Year;1;Konsum;Menge
+33.63;ID_2;Total, Konsumeier;20220101;Year;1;Konsum;Menge
+45.93;ID_3;Total, CH;20220101;Year;1;Konsum;Menge
+13.17;ID_1;Boden, Schaleneier, CH;20220101;Year;1;Konsum;Menge
+19.87;ID_4;Total, CH + Import;20220101;Year;1;Konsum;Menge
