@@ -16,7 +16,7 @@ LINDAS_data <- data %>%
   select(!c(cubes, observation))
 
 #define date type column
-year_index <- which(!is.na(LINDAS_data$month))
+year_index <- which(is.na(LINDAS_data$month))
 LINDAS_data$datetype <- 'Month'
 LINDAS_data$datetype[year_index] <- 'Year'
 
