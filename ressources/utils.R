@@ -193,7 +193,6 @@ data_tester_MARS_LINDAS_DF <- function(MARS_df, LINDAS_df, filename){
 
         MARS_value <- MARS_subdata[which(MARS_subdata$Datum == datum), 'KeyIndicator']
         LINDAS_value <- as.vector(LINDAS_subdata[which(LINDAS_subdata$Datum == datum), 'KeyIndicator'])
-        LINDAS_value <- LINDAS_value[[1]]
         val <- '0'
 
         if(sum(is.na(MARS_value) & length(LINDAS_value) == 0) == 2){
@@ -324,7 +323,6 @@ data_tester_MARS_PowerBI <- function(MARS_df, PowerBI_df, filename){
         
         MARS_value <- MARS_subdata[which(MARS_subdata$date_id == datum), 'keyindicator']
         LINDAS_value <- as.vector(LINDAS_subdata[which(LINDAS_subdata$date_id == datum), 'keyindicator'])
-        LINDAS_value <- LINDAS_value[[1]]
         val <- '0'
         
         if(sum(is.na(MARS_value) & length(LINDAS_value) == 0)==2){
