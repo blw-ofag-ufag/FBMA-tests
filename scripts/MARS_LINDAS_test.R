@@ -71,10 +71,4 @@ dir.create('../test_outputs', showWarnings = FALSE)
 #test LINDAS data
 data_tester_MARS_LINDAS_DF(MARS_data,
                            LINDAS_data,
-                           'test_outputs/MARS_LINDAS_test')
-
-
-
-
-
-
+                           '../test_outputs/MARS_LINDAS_test')
