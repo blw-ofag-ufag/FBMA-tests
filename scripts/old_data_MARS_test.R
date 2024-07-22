@@ -21,13 +21,16 @@ dico_products_names <- c('Total_Konsumeier' = 'Total, Konsumeier',
                          'Boden_Schaleneier_CH' = 'Boden, Schaleneier, CH',
                          'Total_CH_Import' = 'Total, CH + Import')
 
-#format Date_ID columns
+#format Date_ID columns (comment the line if you are testing monthly or daily data)
 MARS_data$Date_ID <- gsub('0101', '', MARS_data$Date_ID)
+
+#create a directory
+dir.create('../test_outputs', showWarnings = FALSE)
 
 #test MARS data
 data_tester_Excel_MARS(old_df, 
                        MARS_data, 
                        dico_products_names, 
-                       'test_outputs/Test', 
+                       '../test_outputs/Test', 
                        nbr_digits = 2)
 

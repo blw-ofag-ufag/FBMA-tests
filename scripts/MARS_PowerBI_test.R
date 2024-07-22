@@ -1,25 +1,19 @@
-#title: eggs_Markt_Struktur_test
+#title: MARS_PowerBI_test
 #author: Gendre Matthieu
 
-setwd('data_testing/')
-source('../R_scripts/utils.R')
+source('ressources/utils.R')
 library(readxl)
-library(dplyr)
 
 #load old data
-#PowerBI_Daten <- readxl::read_xlsx('PowerBI_Data/Eier_Prokopf.xlsx')
-#PowerBI_Daten <- readxl::read_xlsx('PowerBI_Data/MEM_total_contribution.xlsx')
-PowerBI_Daten <- readxl::read_xlsx('PowerBI_Data/Eier_Daten_all_DM.xlsx')
+PowerBI_Daten <- readxl::read_xlsx('../datasets/PowerBI_example.xlsx')
 colnames(PowerBI_Daten) <- gsub("\\[", "", colnames(PowerBI_Daten))
 colnames(PowerBI_Daten) <- gsub("\\]", "", colnames(PowerBI_Daten))
 PowerBI_Daten$Date <- gsub("-", "", PowerBI_Daten$Date)
 
 #load MARS data
-#MARS_Daten <- read.table('MARS_Data/proKopf/proKopf_data_eggs.csv', sep = ';', header = T)
-#MARS_Daten <- read.table('MARS_Data/MEM/MEM_total_contribution_per_eggs.csv', sep = ';', header = T)
-MARS_Daten <- read.table('MARS_Data/LINDAS_testing/production_quantities_names.csv',sep = ';', header = T)
-#MARS_Daten <- read.table('MARS_Data/LINDAS_testing/Eggs_MARS_allData_names.csv', sep = ';', header = T)
-
+MARS_Daten <- read.table('../datasets/MARS_data_example_names.csv',
+                         sep = ';', 
+                         header = T)
 
 #Adapt some columns names
 colnames(PowerBI_Daten)[which(colnames(PowerBI_Daten) == 'KEYINDICATOR')] <- 'KeyIndicator'
@@ -51,16 +45,15 @@ PowerBI_Daten$product_name <- paste(PowerBI_Daten$product_name,
                                     PowerBI_Daten$datetype,
                                     sep = '//')
 
-unique(PowerBI_Daten$product_name)
-
-colnames(PowerBI_Daten)
-colnames(MARS_Daten)
-
-str(PowerBI_Daten)
-str(MARS_Daten)
 
 #sort by Produkt name and date
 PowerBI_Daten <- PowerBI_Daten %>% arrange('date_ID', 'product_name')
 MARS_Daten <- MARS_Daten %>% arrange('date_ID', 'product_name')
 
-data_tester_MARS_PowerBI(MARS_Daten, PowerBI_Daten, 'test_outputs/PowerBI_pm_year')
+#create a directory
+dir.create('../test_outputs', showWarnings = FALSE)
+
+#test PowerBI data
+data_tester_MARS_PowerBI(MARS_Daten, 
+                         PowerBI_Daten, 
+                         '../test_outputs/PowerBI_pm_year')

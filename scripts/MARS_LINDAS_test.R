@@ -1,12 +1,12 @@
 #title: MARS_LINDAS_DF_test
 #author: Gendre Matthieu
 
-source('../ressources/utils.R')
+source('ressources/utils.R')
 library(tidyr)
 
 #Load LINDAS data
 # define the SPARQL query (to run this on a federal computer, set proxy server's address)
-data <- sparql(path = "../ressources/sparql_query.rq",
+data <- sparql(path = "ressources/sparql_query.rq",
                url = "https://int.lindas.admin.ch/query",
                proxy_url = 'http://proxy-bvcol.admin.ch')
 
@@ -33,7 +33,9 @@ LINDAS_data <- LINDAS_data %>% select(-c('month', 'day', 'year'))
 
 
 #load MARS data 
-MARS_data <- read.table('../datasets/MARS_data_example_names.csv', sep = ';', header = T)
+MARS_data <- read.table('../datasets/MARS_data_example_names.csv',
+                        sep = ';',
+                        header = T)
 
 #lowercase columns names
 colnames(MARS_data) <- tolower(colnames(MARS_data))
@@ -63,7 +65,10 @@ LINDAS_data$Produkt <- paste(LINDAS_data$Produkt,
                              LINDAS_data$Datentype,
                              sep = '//')
 
-#test
+#create a directory
+dir.create('../test_outputs', showWarnings = FALSE)
+
+#test LINDAS data
 data_tester_MARS_LINDAS_DF(MARS_data,
                            LINDAS_data,
                            'test_outputs/MARS_LINDAS_test')

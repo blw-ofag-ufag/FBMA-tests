@@ -1,7 +1,7 @@
 #title: MARS_Datenfilter_test
 #author: Gendre Matthieu
 
-source('../ressources/utils.R')
+source('ressources/utils.R')
 
 #load libraries
 library(tidyr)
@@ -53,7 +53,9 @@ combined_files_DF$Datum <- paste0(combined_files_DF$Year,
 combined_files_DF <- combined_files_DF %>% select(-c('Month', 'Day', 'Year'))
 
 #read all MARS dataset and merge in one. 
-MARS_data <- read.table('../datasets/MARS_example_names.csv', sep = ';', header = T)
+MARS_data <- read.table('../datasets/MARS_example_names.csv',
+                        sep = ';', 
+                        header = T)
 
 #lowercase
 colnames(MARS_data) <- tolower(colnames(MARS_data))
@@ -79,7 +81,10 @@ combined_files_DF$Produkt <- paste(combined_files_DF$Produkt,
                                    combined_files_DF$datetype,
                                    sep = '//')
 
-#test
+#create a directory
+dir.create('../test_outputs', showWarnings = FALSE)
+
+#test Datenfilter data
 data_tester_MARS_LINDAS_DF(MARS_data,
                            combined_files_DF,
                            'test_outputs/MARS_Datenfilter_test')
