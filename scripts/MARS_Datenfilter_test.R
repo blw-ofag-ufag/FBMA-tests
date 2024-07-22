@@ -87,4 +87,4 @@ dir.create('../test_outputs', showWarnings = FALSE)
 #test Datenfilter data
 data_tester_MARS_LINDAS_DF(MARS_data,
                            combined_files_DF,
-                           'test_outputs/MARS_Datenfilter_test')
+                           '../test_outputs/MARS_Datenfilter_test')
