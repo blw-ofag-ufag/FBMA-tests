@@ -7,7 +7,7 @@ source('ressources/utils.R')
 library(tidyr)
 
 #read all Datenfilter datasets and merge in one.
-file_list_LD <- list.files("Datenfilter_Datasets/",
+file_list_LD <- list.files("../datasets/Datenfilter_Datasets/",
                            pattern=".xlsx",
                            full.names = T)
 keyindicators <- c('Preis',
@@ -18,7 +18,6 @@ keyindicators <- c('Preis',
 for (f in 1:length(file_list_LD)){
   
   df <- readxl::read_xlsx(file_list_LD[f])
-  print(file_list_LD[f])
   names(df)[which(names(df) %in% keyindicators)] <- 'KeyIndicator'
   
   if(f == 1){
