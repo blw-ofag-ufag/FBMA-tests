@@ -1,3 +1,4 @@
+
   PREFIX cube: <https://cube.link/>
   PREFIX sh: <http://www.w3.org/ns/shacl#>
   PREFIX schema: <http://schema.org/>
@@ -11,20 +12,7 @@
     GRAPH <https://lindas.admin.ch/foag/agricultural-market-data> {
       
       VALUES(?lang) { ("de") } 
-      FILTER (?product in ( <https://agriculture.ld.admin.ch/foag/product/50>,<https://agriculture.ld.admin.ch/foag/product/51>,<https://agriculture.ld.admin.ch/foag/product/225>,<https://agriculture.ld.admin.ch/foag/product/224>,<https://agriculture.ld.admin.ch/foag/product/226>,<https://agriculture.ld.admin.ch/foag/product/227> ) )
-FILTER (?valueChainDetail in ( <https://agriculture.ld.admin.ch/foag/value-chain-detail/1> ) )
-FILTER (?costComponent in ( <https://agriculture.ld.admin.ch/foag/cost-component/0>,<https://agriculture.ld.admin.ch/foag/cost-component/2> ) )
-FILTER (?currency in ( <https://agriculture.ld.admin.ch/foag/currency/CHF> ) )
-FILTER (?foreignTrade in ( <https://agriculture.ld.admin.ch/foag/foreign-trade/0> ) )
-FILTER (?dataSource in ( <https://agriculture.ld.admin.ch/foag/data-source/1> ) )
-FILTER (?salesRegion in ( <https://agriculture.ld.admin.ch/foag/sales-region/1> ) )
-FILTER (?usage in ( <https://agriculture.ld.admin.ch/foag/usage/0> ) )
-FILTER (?productOrigin in ( <https://agriculture.ld.admin.ch/foag/product-origin/1> ) )
-FILTER (?productProperties in ( <https://agriculture.ld.admin.ch/foag/product-properties/4> ) )
-FILTER (?productionSystem in ( <https://agriculture.ld.admin.ch/foag/production-system/0> ) )
-FILTER (?dataMethod in ( <https://agriculture.ld.admin.ch/foag/data-method/14>,<https://agriculture.ld.admin.ch/foag/data-method/27>,<https://agriculture.ld.admin.ch/foag/data-method/30>,<https://agriculture.ld.admin.ch/foag/data-method/31>,<https://agriculture.ld.admin.ch/foag/data-method/32>,<https://agriculture.ld.admin.ch/foag/data-method/33> ) )
-FILTER (?unit in ( <https://agriculture.ld.admin.ch/foag/unit/0> ) )
-      <https://agriculture.ld.admin.ch/foag/cube/Eggs/Production_Quantity_Year> cube:observationSet ?observationSet .
+	  FILTER (?market in ( <https://agriculture.ld.admin.ch/foag/market/2>) )
       ?observationSet cube:observation ?observation .
               ?observation <https://agriculture.ld.admin.ch/foag/dimension/cost-component> ?costComponent .
             optional { 
@@ -117,31 +105,14 @@ FILTER (?unit in ( <https://agriculture.ld.admin.ch/foag/unit/0> ) )
               ?valueChain schema:name ?valueChainLabel
               filter langMatches(lang(?valueChainLabel), ?lang)
             }
-      ?observation <https://agriculture.ld.admin.ch/foag/measure/quantity> ?measure .
+      #?observation <https://agriculture.ld.admin.ch/foag/measure/price> ?measure .
     }
 
-    ?date time:year ?year.
-    OPTIONAL { ?date time:month ?month. }
+    ?date time:year ?year .
+    FILTER(datatype(?year) = xsd:integer)
+    OPTIONAL {
+      ?date time:month ?month .
+      FILTER(datatype(?month) = xsd:integer)
+    }
 
-
-    
-      ?fromInterval
-        schema:inDefinedTermSet <https://ld.admin.ch/time/year> ;
-        time:year "2001"^^xsd:integer ; 
-        time:hasBeginning/time:inXSDDateTimeStamp ?fromPeriod .
-
-    ?toInterval
-      schema:inDefinedTermSet <https://ld.admin.ch/time/year> ;
-      time:year "2023"^^xsd:integer ;
-      
-      time:hasEnd/time:inXSDDateTimeStamp ?toPeriod .
-
-    ?date time:hasBeginning/time:inXSDDateTimeStamp ?start .
-    ?date time:hasEnd/time:inXSDDateTimeStamp ?end .
-  
-    FILTER (?start >= ?fromPeriod)
-    FILTER (?end <= ?toPeriod)
-    
-    
   } ORDER BY ?year ?month
-  
